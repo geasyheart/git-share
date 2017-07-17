@@ -1,0 +1,8 @@
+__pycache__/
+.idea/
+*.pyc
+*.pyo
+logs/
+venv/
+.venv/
+settings.py

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>注册</title>
+    <link rel="stylesheet" href="../static/css/signup.css">
+</head>
+<body>
+<div class="head-band">
+    <a class="logo" href="/">GitShare</a>
+
+    <form action="https://www.google.com" onsubmit="return dispatch()" class="search-div">
+        <img src="../../static/public/img/search.png" alt="搜索">
+        <input type="text" id="search-keyword">
+    </form>
+
+    <div id="login-nav" class="nav-action">
+        <a href="/signin">登录</a>
+        <a href="/signup">注册</a>
+    </div>
+    <div id="userinfo-nav" class="nav-action">
+        <a href="/message">通知</a>
+        <a id="userinfo" href="/settings"></a>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="content">
+        <div class="content-left">
+            <div id="p1" class="form-data active">
+                <div class="basic-form">
+                    注册GitShare账号!
+                </div>
+                <div class="basic-form">
+                    <label for="email">邮箱:</label>
+                    <input type="email" class="basic-input" id="email">
+                    <span id="email-warn" class="warning"></span>
+                </div>
+                <div class="basic-form">
+                    <!--引入极限验证-->
+                    <div class="geetest_radar_tip"></div>
+                    <p id="notice" class="hidden warning">请先拖动验证码到相应位置</p>
+                </div>
+                <div>
+                    <button id="signup" class="signup-btn">立即注册</button>
+                </div>
+            </div>
+            <div id="p2" class="form-data">
+                <div class="basic-form">马上完成注册!</div>
+                <div class="basic-form">
+                    <label for="nickname">昵称:</label>
+                    <input type="text" class="basic-input" id="nickname">
+                    <span id="nickname-warn" class="warning"></span>
+                </div>
+                <div class="basic-form">
+                    <label for="pwd">密码:</label>
+                    <input type="password" class="basic-input" id="pwd">
+                    <span id="pwd-warn" class="warning"></span>
+                </div>
+                <div class="basic-form">
+                    <label for="code">邮箱验证码:</label>
+                    <input type="text" class="basic-input" id="code">
+                </div>
+                <div>
+                    <button id="signup" onclick="signup()" class="signup-btn">完成注册</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-right">
+            <div class="left-basic">
+                <div>
+                    <button onclick="bindGit()" class="git-login">通过Github登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>
+        Copyright © 2017 <a href="http://www.git-share.com">GitShare-分享您的Git项目</a>. All rights reserved.
+        <br>
+        Powered by <a href="http://www.git-share.com">git-share.com.</a>
+    </p>
+</div>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://static.geetest.com/static/tools/gt.js"></script>
+<script src="../static/js/signup.js"></script>
+</body>
+</html>

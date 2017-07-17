@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用户信息</title>
+    <link rel="stylesheet" href="../static/css/user.css">
+
+</head>
+<body>
+
+<div class="head-band">
+    <a class="logo" href="/">GitShare</a>
+
+    <form action="https://www.google.com" onsubmit="return dispatch()" class="search-div">
+        <img src="../static/public/img/search.png" alt="搜索">
+        <input type="text" id="search-keyword">
+
+    </form>
+
+    <div id="login-nav" class="nav-action">
+        <a href="/signin">登录</a>
+        <a href="/signup">注册</a>
+    </div>
+    <div id="userinfo-nav" class="nav-action">
+        <a href="/message">通知</a>
+        <a id="userinfo" href="/settings"></a>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="content">
+        <div class="content-left">
+            <div class="left-basic">
+                <div class="basic-info">
+                    <img id="avatar" src="" alt="">
+                    <span id="nickname"></span>
+                </div>
+                <div style="padding:10px;">
+                    <div>
+                        <span id="git"></span>
+                    </div>
+                    <!--
+                    <div class="jifen">
+                        个人财富: <span id="jf">123321</span>
+                    </div>
+                    -->
+                </div>
+
+            </div>
+            <div class="left-basic tep3">
+                <h5>最近的收藏</h5>
+                <ul id="favorite-list">
+                </ul>
+            </div>
+            <div class="left-basic tep4">
+                <h5>最近创建的话题</h5>
+                <ul id="article-list">
+
+                </ul>
+            </div>
+        </div>
+        <div class="content-right">
+            <div id="user-basic-info" class="left-basic">
+                <div class="basic-info">
+                    <img src="" alt="">
+                    <div>
+                        <div id="name"></div>
+                    </div>
+                </div>
+                <div style="padding:10px;">
+                    <div>
+                        <span id="github"></span>
+                    </div>
+                    <!--
+                    <div class="jifen">
+                        个人财富: <span id="jf">123321</span>
+                    </div>
+                    -->
+                </div>
+            </div>
+            <div id="show-login" class="show-login hidden">
+                你可以选择:<a href="/signin">登录</a>或<a href="/signup">注册</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer">
+    <p>
+        Copyright © 2017 <a href="http://www.git-share.com">GitShare-分享您的Git项目</a>. All rights reserved.
+        <br>
+        Powered by <a href="http://www.git-share.com">git-share.com.</a>
+    </p>
+</div>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="../static/js/user.js"></script>
+
+</body>
+</html>

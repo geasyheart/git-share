@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GitShare</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+<body>
+
+<div class="head-band">
+    <a class="logo" href="/">GitShare</a>
+
+    <form action="https://www.google.com" onsubmit="return dispatch()" class="search-div">
+        <img src="../static/public/img/search.png" alt="搜索">
+        <input type="text" id="search-keyword">
+    </form>
+
+    <div id="login-nav" class="nav-action">
+        <a href="/signin">登录</a>
+        <a href="/signup">注册</a>
+    </div>
+    <div id="userinfo-nav" class="nav-action">
+        <a href="/message">通知</a>
+        <a id="userinfo" href="/settings"></a>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="content">
+        <div class="content-left">
+            <div id="node" class="content-nav-top">
+                <a id="recommend" onclick="recommend()">推荐</a>
+            </div>
+            <div class="content-nav-top">
+                <a data-id="-click" onclick="orderBy(this)">点击数</a>
+                <a data-id="-comment" onclick="orderBy(this)">回复数</a>
+                <a data-id="-favorite" onclick="orderBy(this)">收藏数</a>
+                <a data-id="-like" onclick="orderBy(this)">点赞数</a>
+
+
+                <a onclick="showFeedback()">反馈</a>
+            </div>
+            <div id="article-list">
+
+            </div>
+
+            <div class="page">
+                <div onclick="prevPage()" class="bp"><a href="javascript:;">< Previous Post</a></div>
+                <div onclick="nextPage()" class="lp"><a href="javascript:;">Next Post ></a></div>
+            </div>
+        </div>
+        <div class="content-right">
+            <div id="user-basic-info" class="left-basic">
+
+                <div class="basic-info">
+                    <img src="" alt="">
+                    <div>
+                        <div id="name"></div>
+                        <!--
+                        <div id="gender">女</div>
+                        <div id="company">company</div>
+                        -->
+                    </div>
+                </div>
+                <div style="padding:10px;">
+                    <div>
+                        <span id="github"></span>
+                    </div>
+                    <!--
+                    <div class="jifen">
+                        个人财富: <span id="jf">123321</span>
+                    </div>
+                    -->
+                </div>
+            </div>
+            <div id="show-login" class="show-login hidden">
+                你可以选择:<a href="/signin">登录</a>或<a href="/signup">注册</a>
+                <div>
+                    <button onclick="bindGit()" class="git-login">通过Github登录</button>
+                </div>
+            </div>
+            <!--
+            <div id="reward" class="left-basic tep3">
+                <button class="basic-btn" onclick="">领取今日奖励</button>
+            </div>
+            -->
+            <div id="git-pub" class="left-basic tep3">
+                <button class="basic-btn" onclick="linkPub()">发布话题</button>
+            </div>
+            <div class="left-basic tep4">
+                <div class="hot">热议项目</div>
+                <ul class="hot-list">
+                </ul>
+            </div>
+            <div class="left-basic tep6">
+                <div class="hot">友情社区</div>
+                <ul class="friendly">
+                    <li>
+                        <a href="http://golangtc.com/" target="_blank">
+                            <img src="http://77fkk5.com1.z0.glb.clouddn.com/logo/golangtc.png?imageView2/2/h/60/q/100">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://v2mm.tech/" target="_blank">
+                            <img alt="V2MM"
+                                 src="https://v2mm-upload.b0.upaiyun.com/images/43313a23-44ab-4884-a5e6-8cad81cbdde8.png">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.python88.com" target="_blank">
+                            <img src="http://www.python88.com/static/image/logo/python88.png" title="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://ruby-china.org/" target="_blank">
+                            <img src="//o4j806krb.qnssl.com/public/images/ruby-china-20150529.png">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="footer">
+    <p>
+        Copyright © 2017 <a href="http://www.git-share.com">GitShare-分享您的Git项目</a>. All rights reserved.
+        <br>
+        Powered by <a href="http://www.git-share.com">git-share.com.</a>
+    </p>
+</div>
+
+<div class="cover"></div>
+<div class="window">
+    <textarea id="feedback" cols="30" rows="10"></textarea>
+    <button onclick="feedback()" class="feedback-btn">提交</button>
+</div>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="../static/js/index.js"></script>
+
+</body>
+</html>

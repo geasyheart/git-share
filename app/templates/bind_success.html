@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录成功</title>
+</head>
+<body>
+
+
+<script>
+    window.onload = function () {
+        var search = location.search.substring(1);
+        var payload = '{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}';
+        localStorage.setItem("userinfo", payload);
+        window.location = '/';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>发布</title>
+    <link rel="stylesheet" href="../static/css/git-pub.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/editor/0.1.0/editor.css">
+</head>
+<body>
+<div class="head-band">
+    <a class="logo" href="/">GitShare</a>
+
+    <form action="https://www.google.com" onsubmit="return dispatch()" class="search-div">
+        <img src="../../static/public/img/search.png" alt="搜索">
+        <input type="text" id="search-keyword">
+
+    </form>
+
+    <div id="login-nav" class="nav-action">
+        <a href="/signin">登录</a>
+        <a href="/signup">注册</a>
+    </div>
+    <div id="userinfo-nav" class="nav-action">
+        <a href="/message">通知</a>
+        <a id="userinfo" href="/settings"></a>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="content">
+        <div class="content-left">
+            <input autofocus class="pub-title" id="title" placeholder="请输入标题">
+            <textarea class="editor" rows="10" style="display: none;"></textarea>
+            <div>
+                <span>选择板块:</span>
+                <select id="category">
+                </select>
+            </div>
+            <div class="git-pub">
+                <button onclick="articlePub()">发布</button>
+                <span id="pub-warn" class="warning"></span>
+            </div>
+        </div>
+
+        <div class="content-right">
+            <div class="left-basic">
+                <strong>遵守规范</strong>
+                <ul>
+                    <li>1.标题描述明确</li>
+                    <li>2.优秀的文档或者优秀的代码注释</li>
+                    <li>3.最好附上项目链接</li>
+                    <li>4.正文使用markdown语法</li>
+                    <li>5.欢迎推荐别人的项目</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>
+        Copyright © 2017 <a href="http://www.git-share.com">GitShare-分享您的Git项目</a>. All rights reserved.
+        <br>
+        Powered by <a href="http://www.git-share.com">git-share.com.</a>
+    </p>
+</div>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/editor/0.1.0/editor.js"></script>
+<script src="//cdn.jsdelivr.net/editor/0.1.0/marked.js"></script>
+<script src="../static/js/git-pub.js"></script>
+<span hidden>thanks:<a href="https://github.com/lepture/editor">markdown支持</a></span>
+</body>
+</html>

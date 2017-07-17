@@ -1,0 +1,301 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    list-style: none;
+}
+
+.head-band {
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 44px;
+    line-height: 44px;
+    background: #fff;
+}
+
+.container {
+    background: #e2e2e2;
+    padding: 20px 0 20px 0;
+    overflow: hidden;
+
+}
+
+.content {
+    width: 960px;
+    position: relative;
+    overflow: hidden;
+    left: 50%;
+    margin-left: -480px;
+}
+
+.content-left {
+    float: left;
+
+    width: 630px;
+    min-height: 1000px;
+}
+
+.content-right {
+    float: right;
+    width: 300px;
+}
+
+.footer {
+    width: 100%;
+    background: #fff;
+}
+
+/**/
+
+.logo {
+    margin-left: 290px;
+    float: left;
+}
+
+.search-div {
+    float: left;
+    left: 75px;
+    position: relative;
+    border-radius: 16px;
+    width: 214px;
+    height: 30px;
+    top: 8px;
+    border: 1px solid #e2e2e2;
+}
+
+.search-div img {
+    position: relative;
+    top: -1px;
+    left: 7px;
+}
+
+.search-div input {
+    position: relative;
+    top: -8px;
+    right: -5px;
+    border: none;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.nav-action a {
+    color: black;
+    display: inline-block;
+    width: 50px;
+}
+
+.nav-action {
+    float: right;
+    position: relative;
+    right: 290px;
+}
+
+.nav-action a:hover {
+    color: gray;
+}
+
+.hidden {
+    display: none;
+}
+
+.left-basic {
+    background: #fff;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.left-basic a {
+    color: black;
+}
+
+.left-basic a:hover {
+    color: gray;
+}
+
+.basic-info {
+    overflow: hidden;
+}
+
+.basic-info > img {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 18px;
+}
+
+.basic-info > div {
+    float: left;
+}
+
+.show-login {
+    font-size: 14px;
+    text-align: center;
+    background: #fff;
+    height: 43px;
+    line-height: 43px;
+}
+
+.show-login a {
+    color: green;
+}
+
+#name {
+    /*position: relative;*/
+    /*top: 18px;*/
+}
+
+#gender {
+    position: relative;
+    top: 28px;
+}
+
+#company {
+    position: relative;
+    top: 38px;
+}
+
+.git-addr {
+    position: relative;
+    top: 10px;
+}
+
+#github a {
+    color: #e2e2e2;
+}
+
+.wealth {
+    position: relative;
+    top: 10px;
+    padding: 10px;
+}
+
+.wealth-click {
+    float: left;
+    width: 30%;
+    height: 50px;
+}
+
+.wealth-comment {
+    float: left;
+    width: 30%;
+    height: 50px;
+}
+
+.wealth-fav {
+    float: left;
+    width: 30%;
+    height: 50px;
+
+}
+
+.basic-btn {
+    width: 120px;
+    outline: none;
+    border: none;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    margin-left: -60px;
+    font-size: 17px;
+    background: white;
+}
+
+.basic-btn:hover {
+    color: #778087;
+}
+
+#jf {
+    color: gray;
+}
+
+.tep3 {
+    top: 20px;
+    position: relative;
+}
+
+.tep4 {
+    top: 40px;
+    position: relative;
+}
+
+.tep5 {
+    top: 60px;
+    position: relative;
+}
+
+.tep6 {
+    top: 80px;
+    position: relative;
+    padding: 0;
+}
+
+.hot {
+    position: relative;
+    left: 101px;
+}
+
+.hot-list li {
+    height: 30px;
+    border-bottom: 1px solid #e2e2e2;
+    overflow: hidden;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.hot-list li a {
+    color: #778087;
+}
+
+.comp {
+    position: relative;
+    left: 88px;
+}
+
+#favorite-list li {
+    border-bottom: 1px solid #e2e2e2;
+    padding-top: 10px;
+}
+
+#favorite-list li img {
+    max-width: 40px;
+    max-height: 40px;
+}
+
+#article-list li {
+    border-bottom: 1px solid #e2e2e2;
+    padding-top: 10px;
+}
+
+#article-list li img {
+    max-width: 40px;
+    max-height: 40px;
+}
+
+.fs {
+    position: relative;
+    top: -14px;
+}
+
+.fs a {
+    color: green
+}
+
+.fs span {
+    font-size: 12px;
+}
+
+.footer p {
+    text-align: center;
+    padding: 20px 0 20px 0;
+}
+
+.footer p a {
+    text-decoration: none;
+    color: green;
+}

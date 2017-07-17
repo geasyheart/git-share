@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>消息中心</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/editor/0.1.0/editor.css">
+    <link rel="stylesheet" href="../static/css/message.css">
+
+</head>
+<body>
+
+<div class="head-band">
+    <a class="logo" href="/">GitShare</a>
+
+    <form action="https://www.google.com" onsubmit="return dispatch()" class="search-div">
+        <img src="../static/public/img/search.png" alt="搜索">
+        <input type="text" id="search-keyword">
+
+    </form>
+
+    <div id="login-nav" class="nav-action">
+        <a href="/signin">登录</a>
+        <a href="/signup">注册</a>
+    </div>
+    <div id="userinfo-nav" class="nav-action">
+        <a href="/message">通知</a>
+        <a id="userinfo" href="/settings"></a>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="content">
+        <div class="content-left">
+            <div class="message-head">
+                <span onclick="getNotification(0)">未读消息</span>
+                <span onclick="getNotification(1)">已读消息/</span>
+            </div>
+            <div class="message-body">
+                <ul>
+
+                </ul>
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="left-basic">
+                <div class="basic-info">
+                    <img src="" alt="">
+                    <div>
+                        <div id="name"></div>
+                        <!--
+                        <div id="gender">女</div>
+                        <div id="company">company</div>
+                        -->
+                    </div>
+                </div>
+                <div style="padding:10px;">
+                    <div>
+                        <span id="github"></span>
+                    </div>
+                    <!--
+                    <div class="wealth" style="overflow: hidden;">
+                        <div class="wealth-click">
+                            <span>点击数</span>
+                            <span>123</span>
+                        </div>
+                        <div class="wealth-comment">
+                            <span>评论数</span>
+                            <span>123</span>
+                        </div>
+                        <div class="wealth-fav">
+                            <span>收藏数</span>
+                            <span>123</span>
+                        </div>
+                    </div>
+
+                    <div class="jifen">
+                        个人财富: <span id="jf">123321</span>
+                    </div>
+                    -->
+                </div>
+            </div>
+            <!--
+            <div class="left-basic tep3">
+                <button class="basic-btn" onclick="">领取今日奖励</button>
+            </div>
+            -->
+            <div class="left-basic tep3">
+                <button class="basic-btn" onclick="linkPub()">发布话题</button>
+            </div>
+            <div class="left-basic tep4">
+                <span class="hot">热议项目</span>
+                <ul class="hot-list">
+
+                </ul>
+
+            </div>
+            <!--
+            <div class="left-basic tep6">
+                <span class="comp">编程挑战排行榜</span>
+                <ul>
+                    <li>passpasspass</li>
+                    <li>passpasspass</li>
+                </ul>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
+
+
+
+<div class="footer">
+    <p>
+        Copyright © 2017 <a href="http://www.git-share.com">GitShare-分享您的Git项目</a>. All rights reserved.
+        <br>
+        Powered by <a href="http://www.git-share.com">git-share.com.</a>
+    </p>
+</div>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/editor/0.1.0/marked.js"></script>
+<script src="../static/js/message.js"></script>
+
+</body>
+</html>
