@@ -16,11 +16,17 @@ ul li {
     background: #fff;
 }
 
+.head-inline {
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
 .container {
     background: #e2e2e2;
     padding: 20px 0 20px 0;
     overflow: hidden;
-
+    min-width: 960px;
 }
 
 .content {
@@ -48,7 +54,6 @@ ul li {
 }
 
 .logo {
-    margin-left: 290px;
     float: left;
 }
 
@@ -83,6 +88,7 @@ ul li {
 
 a {
     text-decoration: none;
+    color:gray;
 }
 
 .nav-action a {
@@ -92,8 +98,6 @@ a {
 
 .nav-action {
     float: right;
-    position: relative;
-    right: 290px;
 }
 
 .nav-action a:hover {
@@ -105,7 +109,7 @@ a {
 }
 
 .form-data {
-    padding: 20px 0 0 20px;
+    padding: 20px;
     background: #fff;
 }
 
@@ -154,9 +158,10 @@ a {
 
 .footer p {
     text-align: center;
-    padding:20px 0 20px 0;
+    padding: 20px 0 20px 0;
 }
-.footer p a{
+
+.footer p a {
     text-decoration: none;
     color: green;
 }

@@ -1,7 +1,7 @@
 from flask import Blueprint
 
 from app.modules.index.views import IndexHandler, EditorHandler, SignupHandler, SigninHandler, ArticleDetailHandler, \
-    MessageHandler, UserHandler, UserSettingHandler, GitHubBindHandler, GitHubBindSuccessHandler
+    MessageHandler, UserHandler, UserSettingHandler, GitHubBindHandler
 
 modules = Blueprint("index", __name__)
 
@@ -13,5 +13,4 @@ modules.add_url_rule("/article/<node>/<article>", view_func=ArticleDetailHandler
 modules.add_url_rule("/message", view_func=MessageHandler.as_view("message"))
 modules.add_url_rule("/user/<uid>", view_func=UserHandler.as_view("user_page"))
 modules.add_url_rule("/settings", view_func=UserSettingHandler.as_view("settings"))
-modules.add_url_rule("/git-bind",view_func=GitHubBindHandler.as_view("git_bind"))
-modules.add_url_rule("/git-bind-success",view_func=GitHubBindSuccessHandler.as_view("git_bind_success"))
+modules.add_url_rule("/git-bind", view_func=GitHubBindHandler.as_view("git_bind"))

@@ -101,13 +101,12 @@ class GitCallBackApi(ServiceView):
                     if user2:
                         return redirect(url_for("index.git_bind", **{"nickname": git_nickname}))
                     return redirect(url_for("index.git_bind", **{"email": git_email, "nickname": git_nickname}))
-                redi = redirect(url_for("index.git_bind_success", **user.to_dict()))
+                redi = redirect("/")
                 response = current_app.make_response(redi)
                 token = Token(current_app.config['SECRET_KEY'])
                 cookie_name = current_app.config["COOKIE_NAME"]
                 cookie_max_age = current_app.config["COOKIE_MAX_AGE"]
-                basic_info = {"uid": user.uid, "role": user.role}
-                response.set_cookie(cookie_name, token.dumps(basic_info), cookie_max_age, httponly=True)
+                response.set_cookie(cookie_name, token.dumps(user.to_encode()), cookie_max_age, httponly=True)
                 response.set_cookie('uid', str(user.uid), cookie_max_age)
                 return response
             else:

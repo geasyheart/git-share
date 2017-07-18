@@ -23,6 +23,7 @@ function userInfo() {
             var payload = JSON.parse(userinfo);
             var nickname = payload.nickname;
             $("#login-nav").addClass("hidden");
+            $("#userinfo").text(nickname);
             $("#name").append("<a href='/settings'>" + nickname + "</a>");
         } else {
             $.getJSON("/api/user/" + parseInt(uid), null, function (data) {

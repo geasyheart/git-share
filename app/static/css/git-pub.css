@@ -16,10 +16,18 @@ ul li {
     background: #fff;
 }
 
+
+.head-inline {
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
 .container {
     background: #e2e2e2;
     height: 1030px;
     padding: 20px 0 20px 0;
+    min-width:960px;
 }
 
 .content {
@@ -53,7 +61,6 @@ ul li {
 /**/
 
 .logo {
-    margin-left: 290px;
     float: left;
 }
 
@@ -84,6 +91,7 @@ ul li {
 
 a {
     text-decoration: none;
+    color:gray;
 }
 
 .nav-action a {
@@ -93,8 +101,6 @@ a {
 
 .nav-action {
     float: right;
-    position: relative;
-    right: 290px;
 }
 
 .nav-action a:hover {

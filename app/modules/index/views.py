@@ -53,7 +53,3 @@ class GitHubBindHandler(MethodView):
     def get(self):
         return render_template("git-bind.html")
 
-
-class GitHubBindSuccessHandler(MethodView):
-    def get(self):
-        return render_template("bind_success.html")

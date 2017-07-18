@@ -8,22 +8,23 @@
 </head>
 <body>
 <div class="head-band">
-    <a class="logo" href="/">GitShare</a>
+    <div class="head-inline">
+        <a class="logo" href="/">GitShare</a>
 
-    <form action="https://www.google.com" onsubmit="return dispatch()" class="search-div">
-        <img src="../../static/public/img/search.png" alt="搜索">
-        <input type="text" id="search-keyword">
-    </form>
+        <form action="https://www.google.com" onsubmit="return dispatch()" class="search-div">
+            <img src="../../static/public/img/search.png" alt="搜索">
+            <input type="text" id="search-keyword">
+        </form>
 
-    <div id="login-nav" class="nav-action">
-        <a href="/signin">登录</a>
-        <a href="/signup">注册</a>
+        <div id="login-nav" class="nav-action">
+            <a href="/signin">登录</a>
+            <a href="/signup">注册</a>
+        </div>
+        <div id="userinfo-nav" class="nav-action">
+            <a href="/message">通知</a>
+            <a id="userinfo" href="/settings"></a>
+        </div>
     </div>
-    <div id="userinfo-nav" class="nav-action">
-        <a href="/message">通知</a>
-        <a id="userinfo" href="/settings"></a>
-    </div>
-
 </div>
 
 <div class="container">

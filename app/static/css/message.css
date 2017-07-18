@@ -16,11 +16,18 @@ ul li {
     background: #fff;
 }
 
+.head-inline {
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
 .container {
     background: #e2e2e2;
     padding: 20px 0 20px 0;
     overflow: hidden;
-
+    min-width: 960px;
 }
 
 .content {
@@ -29,12 +36,13 @@ ul li {
     overflow: hidden;
     left: 50%;
     margin-left: -480px;
+    min-height:1000px;
 }
 
 .content-left {
     float: left;
     width: 630px;
-    min-height:1000px;
+    background:#fff;
 }
 
 .content-right {
@@ -50,7 +58,6 @@ ul li {
 /**/
 
 .logo {
-    margin-left: 290px;
     float: left;
 }
 
@@ -81,6 +88,7 @@ ul li {
 
 a {
     text-decoration: none;
+    color:gray;
 }
 
 .nav-action a {
@@ -90,8 +98,6 @@ a {
 
 .nav-action {
     float: right;
-    position: relative;
-    right: 290px;
 }
 
 .nav-action a:hover {
@@ -147,6 +153,12 @@ a {
 .git-addr {
     position: relative;
     top: 10px;
+}
+
+.github a {
+    color: #e2e2e2;
+    position: relative;
+    top:-6px;
 }
 
 .wealth {
@@ -241,6 +253,7 @@ a {
     background: #f6f6f6;
     padding: 10px;
     overflow: hidden;
+    border-bottom:1px solid #fff;
 }
 
 .message-head span {
@@ -255,22 +268,20 @@ a {
 }
 
 .message-body {
-    background: #e2e2e2;
-    padding-top: 10px;
+
 }
 
 .li-cell {
     background: #fff;
-    margin-top: 10px;
-    padding-left: 2px;
 }
 
 .li-head {
     overflow: hidden;
     background: #f6f6f6;
-    height: 24px;
+    height: 40px;
     font-size: 12px;
-    line-height: 24px;
+    line-height: 40px;
+    padding: 0 7px 0 7px;
 }
 
 .li-head span {
@@ -288,7 +299,7 @@ a {
     display: block;
 }
 .li-head span:first-child a{
-    color:#80bd01;
+    color:green;
 }
 .li-head span:nth-child(2){
     cursor: pointer;
@@ -304,7 +315,7 @@ a {
 }
 
 .li-body a{
-    color: #80bd01;
+    color: green;
 }
 
 .footer p {

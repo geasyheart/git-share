@@ -47,8 +47,9 @@ class User(Document):
 
     @github.setter
     def github(self, value):
-        if not verify_url(value):
-            raise ArgsError(message="URL格式不对!")
+        if value:
+            if not verify_url(value):
+                raise ArgsError(message="URL格式不对!")
         self._github = value
 
     @property

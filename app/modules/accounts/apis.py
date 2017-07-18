@@ -143,8 +143,7 @@ class UserSettings(LoginView):
         for key in data:
             if key not in ("nickname", "github", "avatar", "favorite_public"):
                 continue
-            if data[key]:
-                setattr(user, key, data[key])
+            setattr(user, key, data[key])
         try:
             user.save()
         except NotUniqueError:

@@ -28,7 +28,9 @@ function userInfo() {
             $('.basic-info img').attr('src', avatar);
             $("#name").append("<a href='/settings'>" + nickname + "</a>");
             if (github) {
-                $("#github").text(github)
+                var git_split = github.split("/");
+                var git_name = git_split[git_split.length - 1];
+                $("#github").append("<a href='"+github+"'>"+git_name+"</a>")
             } else {
                 $("#github").append("<a href='/settings'>设置Github地址!</a>")
             }

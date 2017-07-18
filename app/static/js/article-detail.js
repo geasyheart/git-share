@@ -45,11 +45,12 @@ function userInfo() {
             $('.basic-info img').attr('src', avatar);
             $("#name").append("<a href='/settings'>" + nickname + "</a>");
             if (github) {
-                $("#github").text(github)
+                var git_split = github.split("/");
+                var git_name = git_split[git_split.length - 1];
+                $("#github").append("<a href='"+github+"'>"+git_name+"</a>")
             } else {
                 $("#github").append("<a href='/settings'>设置Github地址!</a>")
             }
-
         } else {
             $.getJSON("/api/user/" + parseInt(uid), null, function (data) {
                 localStorage.setItem("userinfo", JSON.stringify(data));
@@ -119,8 +120,8 @@ function listArticle(data) {
                     <span>喜欢:' + like + '•</span> \
                     <span>收藏:' + favorite + '•</span> \
                     <span>评论:' + comment + '•</span> \
-                    <span id="like" onclick="unLike(this)" data-id="' + id + '">取消点赞</span> \
-                    <span id="favorite" onclick="unFavorite(this)" data-id="' + id + '">取消收藏</span>');
+                    <span id="like" onclick="unLike(this)" data-id="' + id + '"><img src="../../static/public/img/unlike.png" alt="like">已点赞</span> \
+                    <span id="favorite" onclick="unFavorite(this)" data-id="' + id + '"><img src="../../static/public/img/unstar.png" alt="star">已收藏</span>');
         } else if (!like_bool && favorite_bool) {
             $(".article-info").append('<span>时间:' + time + '•</span> \
                     <span>作者:<a href="/user/' + uid + '">' + nickname + '</a></span> \
@@ -128,8 +129,8 @@ function listArticle(data) {
                     <span>喜欢:' + like + '•</span> \
                     <span>收藏:' + favorite + '•</span> \
                     <span>评论:' + comment + '•</span> \
-                    <span id="like"   onclick="like(this)" data-id="' + id + '">点赞</span> \
-                    <span id="favorite" onclick="unFavorite(this)" data-id="' + id + '">取消收藏</span>');
+                    <span id="like"   onclick="like(this)" data-id="' + id + '"><img src="../../static/public/img/like.png" alt="like">点赞</span> \
+                    <span id="favorite" onclick="unFavorite(this)" data-id="' + id + '"><img src="../../static/public/img/unstar.png" alt="star">已收藏</span>');
         } else if (like_bool && !favorite_bool) {
             $(".article-info").append('<span>时间:' + time + '•</span> \
                     <span>作者:<a href="/user/' + uid + '">' + nickname + '</a></span> \
@@ -137,8 +138,8 @@ function listArticle(data) {
                     <span>喜欢:' + like + '•</span> \
                     <span>收藏:' + favorite + '•</span> \
                     <span>评论:' + comment + '•</span> \
-                    <span id="like"    onclick="unLike(this)" data-id="' + id + '">取消点赞</span> \
-                    <span id="favorite" onclick="favorite(this)" data-id="' + id + '">收藏</span>');
+                    <span id="like"    onclick="unLike(this)" data-id="' + id + '"><img src="../../static/public/img/unlike.png" alt="like">已点赞</span> \
+                    <span id="favorite" onclick="favorite(this)" data-id="' + id + '"><img src="../../static/public/img/star.png" alt="star">收藏</span>');
         } else {
             $(".article-info").append('<span>时间:' + time + '•</span> \
                     <span>作者:<a href="/user/' + uid + '">' + nickname + '</a></span> \
@@ -146,8 +147,9 @@ function listArticle(data) {
                     <span>喜欢:' + like + '•</span> \
                     <span>收藏:' + favorite + '•</span> \
                     <span>评论:' + comment + '•</span> \
-                    <span id="like"    onclick="like(this)" data-id="' + id + '">点赞</span> \
-                    <span id="favorite" onclick="favorite(this)" data-id="' + id + '">收藏</span>');
+                    <span id="like" onclick="like(this)" data-id="' + id + '"><img src="../../static/public/img/like.png" alt="like">点赞</span> \
+                    <span id="favorite" onclick="favorite(this)"   data-id="' + id + '"><img src="../../static/public/img/star.png" alt="star">收藏</span> \
+                    ');
         }
     } else {
         $(".article-info").append('<span>时间:' + time + '•</span> \
@@ -156,8 +158,9 @@ function listArticle(data) {
                     <span>喜欢:' + like + '•</span> \
                     <span>收藏:' + favorite + '•</span> \
                     <span>评论:' + comment + '•</span> \
-                    <span id="like" class="hidden" onclick="like(this)" data-id="' + id + '">点赞</span> \
-                    <span id="favorite" class="hidden" onclick="favorite(this)" data-id="' + id + '">收藏</span>');
+                    <span id="like" onclick="like(this)" class="hidden" data-id="' + id + '"><img src="../../static/public/img/like.png" alt="like">点赞</span> \
+                    <span id="favorite" onclick="favorite(this)"  class="hidden"  data-id="' + id + '"><img src="../../static/public/img/star.png" alt="star">收藏</span> \
+            ');
     }
 }
 
@@ -175,7 +178,7 @@ function like(e) {
             if (data.code != 0) {
                 alert(data.message);
             } else {
-                $("#like").text("取消点赞");
+                $("#like").html('<img src="../../static/public/img/unlike.png" alt="like">已点赞');
                 $("#like").attr("onclick", "unLike(this)");
             }
         }
@@ -196,7 +199,7 @@ function unLike(e) {
             if (data.code != 0) {
                 alert(data.message);
             } else {
-                $("#like").text("点赞");
+                $("#like").html('<img src="../../static/public/img/like.png" alt="like">点赞');
                 $("#like").attr("onclick", "like(this)");
             }
         }
@@ -217,7 +220,7 @@ function favorite(e) {
             if (data.code != 0) {
                 alert(data.message);
             } else {
-                $("#favorite").text("取消收藏");
+                $("#favorite").html('<img src="../../static/public/img/unstar.png" alt="star">已收藏');
                 $("#favorite").attr("onclick", "unFavorite(this)");
             }
         }
@@ -239,7 +242,7 @@ function unFavorite(e) {
             if (data.code != 0) {
                 alert(data.message);
             } else {
-                $("#favorite").text("收藏");
+                $("#favorite").html('<img src="../../static/public/img/star.png" alt="star">收藏');
                 $("#favorite").attr("onclick", "favorite(this)");
             }
         }
@@ -296,7 +299,7 @@ function newComment() {
             if (data.code != 0) {
                 alert(data.message);
             } else {
-                $(".comment table").each(function () {
+                $(".cell").each(function () {
                     this.remove()
                 });
                 editor.codemirror.setValue('');
@@ -345,7 +348,7 @@ function getComment(e) {
                 }
             }
             if (self) {
-                $(".comment").append('<table class="comment-table" data-id="' + id + '"> \
+                $(".comment").append('<div class="cell"><table class="comment-table markdown-body" data-id="' + id + '"> \
                     <tr> \
                         <td class="comment-table-td"> \
                             <img class="user-avatar" \
@@ -362,9 +365,9 @@ function getComment(e) {
                             <div class="reply-comment-content">' + marked(content) + '</div>\
                         </td> \
                     </tr> \
-                </table>')
+                </table></div>')
             } else {
-                $(".comment").append('<table class="comment-table" data-id="' + id + '"> \
+                $(".comment").append('<div class="cell"><table class="comment-table" data-id="' + id + '"> \
                     <tr> \
                         <td class="comment-table-td"> \
                             <img class="user-avatar" \
@@ -380,7 +383,7 @@ function getComment(e) {
                             <div class="reply-comment-content">' + marked(content) + '</div>\
                         </td> \
                     </tr> \
-                </table>')
+                </table></div>')
             }
         }
     })
