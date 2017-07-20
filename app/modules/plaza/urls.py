@@ -38,4 +38,4 @@ modules.add_url_rule("/message/<notice_id>", view_func=NoticeApi.as_view("notice
 modules.add_url_rule("/recommend", view_func=ArticleRecommendApi.as_view("recommend"))
 
 # 获取git用户的repo
-modules.add_url_rule("/repos", view_func=GitSpiderApi.as_view("git_spider"), methods=['POST'])
+modules.add_url_rule("/repos/<username>", view_func=GitSpiderApi.as_view("git_spider"))

@@ -451,7 +451,5 @@ class NoticeApi(LoginView):
 
 class GitSpiderApi(ServiceView):
     @require_priv(2)
-    def post(self):
-        username = request.form.get('username')
-        if username:
-            get_user_git.apply_async(args=[username])
+    def get(self, username):
+        get_user_git.apply_async(args=[username])
