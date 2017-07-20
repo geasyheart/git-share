@@ -31,7 +31,7 @@ function userInfo() {
             if (github) {
                 var git_split = github.split("/");
                 var git_name = git_split[git_split.length - 1];
-                $("#github").append("<a href='"+github+"'>"+git_name+"</a>")
+                $("#github").append("<a href='" + github + "'>" + git_name + "</a>")
             } else {
                 $("#github").append("<a href='/settings'>设置Github地址!</a>")
             }
@@ -78,11 +78,16 @@ function getNode() {
 var NODELIST = {};
 
 function listNode(data) {
+    var count = 0;
     for (node of data.node) {
-        var node_id = node.id;
-        var node_name = node.node;
-        NODELIST[node_id] = node_name;
-        $("#recommend").before("<a data-id='" + node_id + "' onclick='searchNode(this)'>" + node_name + "</a>");
+        count += 1;
+        if (count < 10) {
+            var node_id = node.id;
+            var node_name = node.node;
+            NODELIST[node_id] = node_name;
+            $("#recommend").before("<a data-id='" + node_id + "' onclick='searchNode(this)'>" + node_name + "</a>");
+        }
+        $("#node-list").after("<span data-id='" + node_id + "' onclick='searchNode(this)'>" + node_name + "</span>")
     }
     orderBy();
 }
@@ -167,6 +172,7 @@ function listArticle(data) {
         var login = article.login;
         var time = getTime(article.time);
         var node = article.node;
+        var origin = (article.origin) ? "原创" : "转载";
 
         var node_name = NODELIST[node];
         var title = article.title;
@@ -201,7 +207,7 @@ function listArticle(data) {
                                 <strong><a href="javascript:;" class="node">' + node_name + '</a></strong> • \
                                 <strong> \
                                     <a href="/user/' + user_id + '" class="dark">' + nickname + '</a> \
-                                </strong>•' + time + '•' + favorite + '收藏•' + comment + '回复•' + like + '喜欢</span></td>  \
+                                </strong>•' + origin + '•' + time + '•' + favorite + '收藏•' + comment + '回复•' + like + '喜欢</span></td>  \
                         </tr> \
                         </tbody> \
                     </table> \

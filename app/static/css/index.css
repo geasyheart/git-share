@@ -345,6 +345,23 @@ a {
     padding: 0;
 }
 
+.tep7 {
+    top: 100px;
+    position: relative;
+}
+
+.node-span span {
+    color: #000;
+    padding: 10px;
+    display: inline-block;
+}
+
+.node-span span:hover {
+    color: gray;
+    cursor: pointer;
+
+}
+
 .hot {
     text-align: center;
 }

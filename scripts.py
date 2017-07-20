@@ -1,6 +1,6 @@
 from mongoengine import connect
 from app.settings import MONGODB_SETTINGS
-from app.models.accounts.users import EmailTemplate
+from app.models.accounts.users import EmailTemplate, User
 from app.models.plaza.article import ArticleNode
 
 
@@ -16,8 +16,9 @@ EmailTemplate.create_temp("欢迎注册GitShare账号", TEMP, 1, "注册使用")
 
 # 创建节点
 ArticleNode.create_node("编程")
+ArticleNode.create_node("CSS")
+ArticleNode.create_node("HTML")
 ArticleNode.create_node("Python")
-ArticleNode.create_node("PHP")
-ArticleNode.create_node("Java")
-ArticleNode.create_node("Golang")
+ArticleNode.create_node("Go")
 ArticleNode.create_node("文章")
+ArticleNode.create_node("转贴")

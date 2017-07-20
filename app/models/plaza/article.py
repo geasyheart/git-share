@@ -48,13 +48,14 @@ class Article(Document):
     who = IntField()  # 谁
     login = BooleanField()  # 登陆可见
     top = BooleanField(default=False)  # 置顶
+    origin = BooleanField(default=True)  # 是否为原创,此处只支持原创和转载两种模式
 
     @classmethod
     def with_id(cls, id):
         return cls.objects.with_id(id)
 
     @classmethod
-    def create_article(cls, title, body, node, who, login):
+    def create_article(cls, title, body, node, who, login=False, origin=True):
         """
         :type who:int
         :type login: bool
@@ -63,9 +64,10 @@ class Article(Document):
         :param node: 
         :param who: 
         :param login: 
+        :param origin
         :return: 
         """
-        cls(title=title, body=body, node=node, who=who, login=login).save()
+        cls(title=title, body=body, node=node, who=who, login=login, origin=origin).save()
 
     @classmethod
     def list_by_node(cls, node, page, per_page, order_by="-pk"):
@@ -122,7 +124,8 @@ class Article(Document):
             "like": self.like,
             "favorite": self.favorite,
             "who": self.who,
-            "login": self.login
+            "login": self.login,
+            "origin": self.origin
         }
         if not simple:
             payload.update({

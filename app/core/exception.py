@@ -26,3 +26,8 @@ class GeeTestError(ServiceError):
 class TokenRequired(ServiceError):
     code = 403
     message = "需要重新授权登录!"
+
+
+class RoleRequired(ServiceError):
+    code = 405
+    message = "not allowed!"

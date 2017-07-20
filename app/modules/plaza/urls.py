@@ -2,7 +2,7 @@ from flask import Blueprint
 
 from app.modules.plaza.apis import NodeListApi, ArticleApi, NodeListDetailApi, ArticleListApi, ArticleDetailApi, \
     ArticleLikeApi, ArticleFavoriteApi, ArticleHotApi, ArticleCommentApi, NoticePreApi, NoticeApi, ArticleRecommendApi, \
-    FavoriteApi, ArticleUidApi
+    FavoriteApi, ArticleUidApi, GitSpiderApi
 
 modules = Blueprint("plaza", __name__, url_prefix="/api")
 
@@ -36,3 +36,6 @@ modules.add_url_rule("/message/<notice_id>", view_func=NoticeApi.as_view("notice
 
 # 推荐
 modules.add_url_rule("/recommend", view_func=ArticleRecommendApi.as_view("recommend"))
+
+# 获取git用户的repo
+modules.add_url_rule("/repos", view_func=GitSpiderApi.as_view("git_spider"), methods=['POST'])

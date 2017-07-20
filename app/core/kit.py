@@ -4,7 +4,7 @@ from flask import g, make_response, current_app, request, session
 from flask import jsonify
 from flask.views import MethodView
 
-from app.core.exception import ServiceError, GeeTestError, ArgsError, TokenRequired
+from app.core.exception import ServiceError, GeeTestError, ArgsError, TokenRequired, RoleRequired
 from app.lib.geetest import GeetestLib
 from app.utils.token import Token
 
@@ -142,3 +142,27 @@ def login_required(func):
 
 class LoginView(MethodView):
     decorators = [api_view, login_required]
+
+
+def require_priv(role):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            cookie_name = current_app.config["COOKIE_NAME"]
+            cookie = request.cookies.get(cookie_name)
+            if not cookie:
+                return service_response(**TokenRequired().to_dict())
+            token_obj = Token(current_app.config['SECRET_KEY'])
+            rs = token_obj.loads(cookie)
+            if not rs:
+                return service_response(**TokenRequired().to_dict())
+            g.uid = rs.get("uid")
+            g.role = rs.get("role")
+            if g.role == 2:
+                return func(*args, **kwargs)
+            else:
+                return service_response(**RoleRequired().to_dict())
+
+        return wrapper
+
+    return decorator

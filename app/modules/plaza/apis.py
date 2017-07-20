@@ -5,8 +5,10 @@ from bson import ObjectId
 from flask import request, g
 
 import time
+
+from app.celery_tasks.tasks.git_info import get_user_git
 from app.core.exception import ArgsError
-from app.core.kit import ServiceView, LoginView, login_required
+from app.core.kit import ServiceView, LoginView, login_required, require_priv
 from app.models.accounts.users import User
 from app.models.plaza.article import ArticleNode, Article, Like, Favorite
 from app.models.plaza.comment import ArticleComment
@@ -445,3 +447,11 @@ class NoticeApi(LoginView):
             raise NotificationError("没有找到此通知!")
         if ins.to == g.uid:
             ins.modify(set__status=NOTICE_STATUS['DELETE'])
+
+
+class GitSpiderApi(ServiceView):
+    @require_priv(2)
+    def post(self):
+        username = request.form.get('username')
+        if username:
+            get_user_git.apply_async(args=[username])
