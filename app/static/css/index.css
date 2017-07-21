@@ -325,29 +325,7 @@ a {
 }
 
 .tep3 {
-    top: 20px;
-    position: relative;
-}
-
-.tep4 {
-    top: 40px;
-    position: relative;
-}
-
-.tep5 {
-    top: 60px;
-    position: relative;
-}
-
-.tep6 {
-    top: 80px;
-    position: relative;
-    padding: 0;
-}
-
-.tep7 {
-    top: 100px;
-    position: relative;
+    margin-top: 20px;
 }
 
 .node-span span {
