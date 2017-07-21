@@ -79,12 +79,12 @@ var NODELIST = {};
 
 function listNode(data) {
     var count = 0;
-    for (node of data.node) {
+    for (var node of data.node) {
         count += 1;
+        var node_id = node.id;
+        var node_name = node.node;
+        NODELIST[node_id] = node_name;
         if (count < 10) {
-            var node_id = node.id;
-            var node_name = node.node;
-            NODELIST[node_id] = node_name;
             $("#recommend").before("<a data-id='" + node_id + "' onclick='searchNode(this)'>" + node_name + "</a>");
         }
         $("#node-list").after("<span data-id='" + node_id + "' onclick='searchNode(this)'>" + node_name + "</span>")

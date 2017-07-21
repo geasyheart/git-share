@@ -87,7 +87,7 @@ function getUserInfo() {
                 var git_name = git_split[git_split.length - 1];
                 $("#git").append("<a href='"+github+"'>"+git_name+"</a>")
             } else {
-                $("#git").append("<a href='/settings'>设置Github地址!</a>")
+                $("#git").append("此用户尚未设置Github.")
             }
     })
 }
