@@ -1,5 +1,6 @@
 from flask import Blueprint
 
+from app.modules.index.docs import DocsView
 from app.modules.index.views import IndexHandler, EditorHandler, SignupHandler, SigninHandler, ArticleDetailHandler, \
     MessageHandler, UserHandler, UserSettingHandler, GitHubBindHandler
 
@@ -14,3 +15,6 @@ modules.add_url_rule("/message", view_func=MessageHandler.as_view("message"))
 modules.add_url_rule("/user/<uid>", view_func=UserHandler.as_view("user_page"))
 modules.add_url_rule("/settings", view_func=UserSettingHandler.as_view("settings"))
 modules.add_url_rule("/git-bind", view_func=GitHubBindHandler.as_view("git_bind"))
+
+# 文档
+modules.add_url_rule("/docs/<path:path>", view_func=DocsView.as_view("docs"))

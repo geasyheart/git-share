@@ -22,7 +22,17 @@ class GitAuthApi(ServiceView):
 
     def get(self):
         """
-            发送请求
+        @apiVersion 1.0.0
+        @api {get} /api/oauth/github 请求用户授权 
+        @apiName GitAuthApi
+        @apiGroup Oauth Github
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "url": "http://github.com/login/oauth/authorize?client_id=0427a878cffd69c57d24&redirect_uri=http://www.git-share.com/api/oauth/github/callback&scope=user&state=HVU3w1CXGNYzA7EtgjFP90h2dDBoyR"
+        }
         """
         client_id = current_app.config["GITHUB_CLIENT_ID"]
         redirect_uri = current_app.config["GITHUB_CALLBACK"]
@@ -37,8 +47,22 @@ class GitAuthApi(ServiceView):
 class GitCallBackApi(ServiceView):
     def get(self):
         """
-        回调
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/oauth/github/callback 用户授权成功后回调 
+        @apiName GitCallBackApi
+        @apiGroup Oauth Github 
+        
+        @apiParam {String} code 用户授权code
+        @apiParam {String} state 防止csrf的state
+        
+        @apiUse UserCancelError
+        @apiUse StateError
+        @apiUse StateError
+        @apiUse UserCodeError
+        @apiUse UserAccessTokenError
+        @apiUse BindTokenError
+        
+        @apiSuccess {String} code 如果正常，则会跳转，否则会返回json格式报错信息
         """
         args = request.args
         code = args.get('code')
@@ -125,8 +149,13 @@ class GitBindApi(ServiceView):
     @login_required
     def get(self):
         """
-        检测当前用户是否已经绑定了Github
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/oauth/github/bind 检测当前用户是否已经绑定了Github 
+        @apiName GitBindApi
+        @apiGroup Oauth Github 
+        
+        @apiUse TokenRequired
+        @apiUse GitNotBindError
         """
         uid = g.uid
         git_ins = GitHubOauth.search_uid(uid)
@@ -136,7 +165,34 @@ class GitBindApi(ServiceView):
     @geetest_required
     def post(self):
         """
-        :return: 
+        @apiVersion 1.0.0
+        @api {post} /api/oauth/github/bind 对未注册用户会回掉至此进行注册绑定
+        @apiName GitBindApiPost
+        @apiGroup Oauth Github 
+        
+        @apiParam {String} nickname 昵称
+        @apiParam {String} email 邮箱
+        @apiParam {String} code 邮箱注册码
+        @apiParam {String} pwd 密码
+        
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response
+        {
+            "uid": 123,
+            "nickname": "ff",
+            "role": 1,
+            "gender": 1,
+            "avatar": 1,
+            "github": "asdfafa",
+            "fp": true
+        }
+        
+        @apiUse FormatError
+        @apiUse BindTokenError 
+        @apiUse CodeError
+        @apiUse EmailError
+        @apiUse GeeTestError
         """
         data = request.form
         nickname = data.get('nickname')

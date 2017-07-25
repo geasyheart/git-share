@@ -34,8 +34,26 @@ def parse_objectid(objectid):
 class NodeListApi(ServiceView):
     def get(self):
         """
-        返回所有节点
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/node 返回所有的节点 
+        @apiName NodeListApi
+        @apiGroup plaza
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "node":[
+                {
+                    "id": "asdfafasdfafadfadfa",
+                    "node": "adsfafsajfajf"
+                },
+                {
+                    "id": "asdfafasdfafadfadfa2",
+                    "node": "adsfafsajfajf"
+                },
+            ]
+        }
         """
         rs = ArticleNode.objects.all()
         result = {}
@@ -47,8 +65,20 @@ class NodeListApi(ServiceView):
 class ArticleApi(LoginView):
     def post(self):
         """
-        发布
-        :return: 
+        @apiVersion 1.0.0
+        @api {post} /api/article 发布文章 
+        @apiName ArticleApi
+        @apiGroup plaza
+        
+        @apiParam {String} title 题目
+        @apiParam {String} content 正文
+        @apiParam {String} node 节点
+        @apiParam {Boolean} login 登录
+        
+        
+        @apiUse ArgsError
+        @apiUse NotFoundError
+        @apiUse TokenRequired
         """
         form = request.form
         title = form.get('title')
@@ -79,9 +109,74 @@ class ArticleApi(LoginView):
 class NodeListDetailApi(ServiceView):
     def get(self, node):
         """
-        根据node返回文章列表
-        :param node: 
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/article/node/:node 根据节点返回文章列表 
+        @apiName NodeListDetailApi
+        @apiGroup plaza
+        
+        @apiParam {String} node ObjectId类型
+        @apiParam {String} page 第几页
+        @apiParam {String} per_page 每页多少
+        @apiParam {String} order_by 排序规则
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "articles": [
+                {
+                    "id": "asdfa",
+                    "node": "asd",
+                    "title": "a",
+                    "comment": "a",
+                    "top": true,
+                    "time": 1233213213,
+                    "click": 123,
+                    "like": 32,
+                    "favorite": true,
+                    "who": 123,
+                    "login": true,
+                    "origin": true"
+                },
+                {
+                    "id": "asdfa",
+                    "node": "asd",
+                    "title": "a",
+                    "comment": "a",
+                    "top": true,
+                    "time": 1233213213,
+                    "click": 123,
+                    "like": 32,
+                    "favorite": true,
+                    "who": 123,
+                    "login": true,
+                    "origin": true"
+                }
+                ...
+            ],
+            "users": [
+                {
+                    "uid": 123,
+                    "nickname": "asdf",
+                    "role": 1,
+                    "gender": 1,
+                    "avatar": "www.ggadsf.com/asdfsafd.img",
+                    "github": "github.com/adsfasdf",
+                    "fp": true
+                },
+                {
+                    "uid": 123,
+                    "nickname": "asdf",
+                    "role": 1,
+                    "gender": 1,
+                    "avatar": "www.ggadsf.com/asdfsafd.img",
+                    "github": "github.com/adsfasdf",
+                    "fp": true
+                }
+            ],
+            "count": 123
+            
+        }
         """
         parse_objectid(node)
         args = request.args
@@ -101,8 +196,74 @@ class NodeListDetailApi(ServiceView):
 class ArticleListApi(ServiceView):
     def get(self):
         """
-        返回文章列表
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/article 返回文章列表
+        @apiName ArticleListApi
+        @apiGroup plaza
+        
+        @apiParam {String} page 第几页
+        @apiParam {String} per_page 每页多少
+        @apiParam {String} order_by 排序规则
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "articles": [
+                {
+                    "id": "asdfa",
+                    "node": "asd",
+                    "title": "a",
+                    "comment": "a",
+                    "top": true,
+                    "time": 1233213213,
+                    "click": 123,
+                    "like": 32,
+                    "favorite": true,
+                    "who": 123,
+                    "login": true,
+                    "origin": true"
+                },
+                {
+                    "id": "asdfa",
+                    "node": "asd",
+                    "title": "a",
+                    "comment": "a",
+                    "top": true,
+                    "time": 1233213213,
+                    "click": 123,
+                    "like": 32,
+                    "favorite": true,
+                    "who": 123,
+                    "login": true,
+                    "origin": true"
+                }
+                ...
+            ],
+            "users": [
+                {
+                    "uid": 123,
+                    "nickname": "asdf",
+                    "role": 1,
+                    "gender": 1,
+                    "avatar": "www.ggadsf.com/asdfsafd.img",
+                    "github": "github.com/adsfasdf",
+                    "fp": true
+                },
+                {
+                    "uid": 123,
+                    "nickname": "asdf",
+                    "role": 1,
+                    "gender": 1,
+                    "avatar": "www.ggadsf.com/asdfsafd.img",
+                    "github": "github.com/adsfasdf",
+                    "fp": true
+                }
+            ],
+            "count": 123
+            
+        }
+         
         """
         args = request.args
         page = args.get('page', default=1, type=int)
@@ -121,10 +282,36 @@ class ArticleListApi(ServiceView):
 class ArticleDetailApi(ServiceView):
     def get(self, node, article):
         """
-        返回某篇文章
-        :param node
-        :param article
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/article/:node/:article 返回文章
+        @apiName ArticleDetailApi
+        @apiGroup plaza
+        
+        @apiParam {String} node 节点
+        @apiParam {String} article 文章id
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "id": "asdfa",
+            "node": "asd",
+            "title": "a",
+            "comment": "a",
+            "top": true,
+            "time": 1233213213,
+            "click": 123,
+            "like": 32,
+            "favorite": true,
+            "who": 123,
+            "login": true,
+            "origin": true,
+            "content":"hello world!",
+            "like_bool": true,
+            "favorite_bool": true
+        }
+        @apiUse ArgsError
+        @apiUse ArticleError
         """
         parse_objectid(article)
         uid = g.uid
@@ -155,8 +342,70 @@ class ArticleDetailApi(ServiceView):
 class ArticleHotApi(ServiceView):
     def get(self):
         """
-        返回最近一月热议的项目
-        省.
+        @apiVersion 1.0.0
+        @api {get} /api/hot/article 返回最近一月热议的项目
+        @apiName ArticleHotApi
+        @apiGroup plaza
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "articles": [
+                {
+                    "id": "asdfa",
+                    "node": "asd",
+                    "title": "a",
+                    "comment": "a",
+                    "top": true,
+                    "time": 1233213213,
+                    "click": 123,
+                    "like": 32,
+                    "favorite": true,
+                    "who": 123,
+                    "login": true,
+                    "origin": true"
+                },
+                {
+                    "id": "asdfa",
+                    "node": "asd",
+                    "title": "a",
+                    "comment": "a",
+                    "top": true,
+                    "time": 1233213213,
+                    "click": 123,
+                    "like": 32,
+                    "favorite": true,
+                    "who": 123,
+                    "login": true,
+                    "origin": true"
+                }
+                ...
+            ],
+            "users": [
+                {
+                    "uid": 123,
+                    "nickname": "asdf",
+                    "role": 1,
+                    "gender": 1,
+                    "avatar": "www.ggadsf.com/asdfsafd.img",
+                    "github": "github.com/adsfasdf",
+                    "fp": true
+                },
+                {
+                    "uid": 123,
+                    "nickname": "asdf",
+                    "role": 1,
+                    "gender": 1,
+                    "avatar": "www.ggadsf.com/asdfsafd.img",
+                    "github": "github.com/adsfasdf",
+                    "fp": true
+                }
+            ],
+            "count": 123
+            
+        }
+        
         """
         today_first = DateTimeMixin.now()
         today_bson = ObjectId().from_datetime(today_first)
@@ -171,9 +420,36 @@ class ArticleHotApi(ServiceView):
 class ArticleUidApi(ServiceView):
     def get(self, uid):
         """
-        根据uid返回创建的文章
-        :param uid: 
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/user/:uid 根据uid返回创建的文章
+        @apiName ArticleUidApi
+        @apiGroup plaza
+        
+        @apiParam {Integer} uid 用户ID
+        @apiParam {Integer} page 第几页
+        @apiParam {Integer} per_page 每页多少
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "articles": [
+                {
+                    "node": "123",
+                    "id": "12321",
+                    "title": "asdfafd",
+                    "time": 123231234,
+                },
+                {
+                    "node": "123",
+                    "id": "12321",
+                    "title": "asdfafd",
+                    "time": 123231234,
+                },
+                ...
+            ],
+            "count": 1234
+        }
         """
         page = request.args.get('page', type=int, default=1)
         per_page = request.args.get('per_page', type=int, default=10)
@@ -190,9 +466,16 @@ class ArticleUidApi(ServiceView):
 class ArticleLikeApi(LoginView):
     def post(self, article_id):
         """
-        点赞
-        :param article_id: 
-        :return: 
+        @apiVersion 1.0.0
+        @api {post} /api/like/article/:article_id 点赞
+        @apiName ArticleLikeApi
+        @apiGroup plaza 
+        
+        @apiSuccess {Integer} code 0
+        
+        @apiUse ArgsError
+        @apiUse ArticleError
+        @apiUse TokenRequired
         """
         parse_objectid(article_id)
         uid = g.uid
@@ -204,9 +487,16 @@ class ArticleLikeApi(LoginView):
 
     def delete(self, article_id):
         """
-        取消
-        :param article_id: 
-        :return: 
+        @apiVersion 1.0.0
+        @api {delete} /api/like/article/:article_id 取消点赞
+        @apiName ArticleLikeApi2
+        @apiGroup plaza 
+        
+        @apiSuccess {Integer} code 0
+        
+        @apiUse ArgsError
+        @apiUse ArticleError
+        @apiUse TokenRequired
         """
         parse_objectid(article_id)
         uid = g.uid
@@ -221,10 +511,38 @@ class ArticleLikeApi(LoginView):
 class FavoriteApi(ServiceView):
     def get(self, uid):
         """
-        返回某人的收藏
-        :type uid:int
-        :param uid
-        :return: 
+        
+        @apiVersion 1.0.0
+        @api {get} /api/favorite/user/:uid 返回某人的收藏
+        @apiName FavoriteApi
+        @apiGroup plaza  
+        
+        @apiParam {Integer} uid 用户ID
+        @apiParam {Integer} page 第几页
+        @apiParam {Integer} per_page 每页多少
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "favorite": [
+                {
+                    "time": 123,
+                    "rid": "123",
+                    "node": "123",
+                    "title": "title"
+                },
+                {
+                    "time": 123,
+                    "rid": "123",
+                    "node": "123",
+                    "title": "title"
+                }
+                
+            ],
+            "count": 123
+        }
+        
+        @apiUse FavoriteNotAllowError
         """
         page = request.args.get('page', type=int, default=1)
         per_page = request.args.get('per_page', type=int, default=10)
@@ -252,9 +570,17 @@ class FavoriteApi(ServiceView):
 class ArticleFavoriteApi(LoginView):
     def post(self, article_id):
         """
-        收藏文章 
-        :param article_id: 
-        :return: 
+        
+        @apiVersion 1.0.0
+        @api {post} /api/favorite/article/:article_id 收藏文章 
+        @apiName ArticleFavoriteApi
+        @apiGroup plaza  
+        
+        @apiSuccess {Integer} code 0 
+        
+        @apiUse ArgsError
+        @apiUse ArticleError
+        
         """
         parse_objectid(article_id)
         uid = g.uid
@@ -267,9 +593,17 @@ class ArticleFavoriteApi(LoginView):
 
     def delete(self, article_id):
         """
-        取消收藏
-        :param article_id: 
-        :return: 
+        
+        @apiVersion 1.0.0
+        @api {delete} /api/favorite/article/:article_id 取消收藏文章 
+        @apiName ArticleFavoriteApi2
+        @apiGroup plaza  
+        
+        @apiSuccess {Integer} code 0 
+        
+        @apiUse ArgsError
+        @apiUse ArticleError
+        
         """
         parse_objectid(article_id)
         uid = g.uid
@@ -284,8 +618,73 @@ class ArticleFavoriteApi(LoginView):
 class ArticleRecommendApi(LoginView):
     def get(self):
         """
-        简单返回推荐
-        :return: 
+        
+        @apiVersion 1.0.0
+        @api {get} /api/recommend 简单返回推荐 
+        @apiName ArticleRecommendApi
+        @apiGroup plaza  
+        
+        @apiParam {Integer} page 第几页
+        @apiParam {Integer} per_page 每页多少
+        @apiSuccess {Integer} code 0
+        
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "articles": [
+                {
+                    "id": "asdfa",
+                    "node": "asd",
+                    "title": "a",
+                    "comment": "a",
+                    "top": true,
+                    "time": 1233213213,
+                    "click": 123,
+                    "like": 32,
+                    "favorite": true,
+                    "who": 123,
+                    "login": true,
+                    "origin": true"
+                },
+                {
+                    "id": "asdfa",
+                    "node": "asd",
+                    "title": "a",
+                    "comment": "a",
+                    "top": true,
+                    "time": 1233213213,
+                    "click": 123,
+                    "like": 32,
+                    "favorite": true,
+                    "who": 123,
+                    "login": true,
+                    "origin": true"
+                }
+                ...
+            ],
+            "users": [
+                {
+                    "uid": 123,
+                    "nickname": "asdf",
+                    "role": 1,
+                    "gender": 1,
+                    "avatar": "www.ggadsf.com/asdfsafd.img",
+                    "github": "github.com/adsfasdf",
+                    "fp": true
+                },
+                {
+                    "uid": 123,
+                    "nickname": "asdf",
+                    "role": 1,
+                    "gender": 1,
+                    "avatar": "www.ggadsf.com/asdfsafd.img",
+                    "github": "github.com/adsfasdf",
+                    "fp": true
+                }
+            ],
+            "count": 123
+            
+        }
         """
         uid = g.uid
         page = request.args.get('page', default=1, type=int)
@@ -310,9 +709,46 @@ class ArticleRecommendApi(LoginView):
 class ArticleCommentApi(ServiceView):
     def get(self, article_id):
         """
-        获取评论
-        :param article_id: 
-        :return: 
+        
+        @apiVersion 1.0.0
+        @api {get} /api/comment/:article_id 获取评论 
+        @apiName ArticleCommentApi
+        @apiGroup plaza  
+        
+        @apiParam {String} article_id 文章ID
+        @apiParam {Integer} page 第几页
+        @apiParam {Integer} per_page 每页多少
+        
+        @apiSuccess {Integer} code 0
+        
+        @apiSuccessExample {json} Success-Response:
+        {
+            "comments": [
+                {
+                    content: "ghjk",
+                    floor: 1,
+                    id: "59769cd508ba1e382ca491f7",
+                    rid: "596d5f6b5192000009e370f9",
+                    time: 123123131,
+                    uid: 123,
+                    self: true
+                }
+                ...
+            ],
+            "users":[
+                {
+                    "uid": 123,
+                    "nickname": "aa",
+                    "role": 1,
+                    "gender": 1,
+                    "avatar": asd,
+                    "github": github,
+                    "fp": self.favorite_public
+                }
+            ],
+            "count" : 21
+        }
+        
         """
 
         args = request.args
@@ -342,8 +778,21 @@ class ArticleCommentApi(ServiceView):
     @login_required
     def post(self, article_id):
         """
-        发表评论
-        :return: 
+        @apiVersion 1.0.0
+        @api {post} /api/comment/:article_id 发表评论 
+        @apiName ArticleCommentApiPost
+        @apiGroup plaza  
+        
+        @apiParam {String} content 评论内容
+        @apiParam {Integer} at @用户
+        
+        @apiSuccess {Integer} code 0
+        
+        @apiUse ArgsError
+        @apiUse ArticleError
+        @apiUse TokenRequired
+        
+         
         """
         data = request.form
         content = data.get('content')
@@ -374,10 +823,19 @@ class ArticleCommentApi(ServiceView):
     @login_required
     def delete(self, article_id, comment_id):
         """
-        删除评论
-        :param article_id:
-         :param comment_id:
-        :return
+        @apiVersion 1.0.0
+        @api {delete} /api/comment/:article_id/:comment_id 删除评论 
+        @apiName ArticleCommentApiDelet
+        @apiGroup plaza  
+        
+        @apiParam {String} article_id 文章ID
+        @apiParam {String} comment_id 评论ID
+        
+        @apiSuccess {Integer} code 0
+        
+        @apiUse CommentError
+        @apiUse TokenRequired
+        
         """
         parse_objectid(comment_id)
         comment = ArticleComment.with_id(comment_id)
@@ -391,8 +849,20 @@ class ArticleCommentApi(ServiceView):
 class NoticePreApi(LoginView):
     def get(self):
         """
-        预获取未读消息
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/message/new 预获取未读消息 
+        @apiName NoticePreApi
+        @apiGroup plaza  
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "count": 12
+        }
+        
+        @apiUse TokenRequired
+        
         """
         uid = g.uid
         count = Notification.objects(to=uid, status=NOTICE_STATUS["UNREAD"]).count()
@@ -404,8 +874,43 @@ class NoticePreApi(LoginView):
 class NoticeApi(LoginView):
     def get(self):
         """
-            获取
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/message 获取未/已读消息 
+        @apiName NoticeApi
+        @apiGroup plaza  
+      
+        @apiParam {Integer} status 消息状态,1未读,2已读
+        @apiParam {Integer} page 第几页
+        @apiParam {Integer} per_page 每页多少
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "notification": [
+                {
+                    "desc": "[@root ](http://www.git-share.com/user/1)\n\n** test **",
+                    "from": {
+                        "avatar": "/static/public/avatar/12.png",
+                        "fp": true,
+                        "gender": null,
+                        "github": "https://github.com/zonghow",
+                        "nickname": "zonghow",
+                        "role": 1,
+                        "uid": 2
+                    },
+                    "id": "596c535d0adde8000974c235",
+                    "status": 2,
+                    "time": 1500271453,
+                    "title": "在文章163FM第2楼",
+                    "to": 1,
+                    "url": "/article/596c417c65d44029759edcee/596c4dde43ac1700081b4098"
+                }
+            ]
+        }
+        
+        @apiUse TokenRequired
+        
         """
         # todo: 站内信功能的添加
         uid = g.uid
@@ -421,9 +926,16 @@ class NoticeApi(LoginView):
 
     def put(self, notice_id):
         """
-        修改状态
-        :param notice_id
-        :return: 
+        @apiVersion 1.0.0
+        @api {put} /api/message/:notice_id 修改消息状态 
+        @apiName NoticeApi_put
+        @apiGroup plaza  
+        
+        @apiParam notice_id 消息ID
+        @apiParam status 消息状态
+        
+        @apiUse NotificationError
+        @apiUse TokenRequired
         """
         parse_objectid(notice_id)
         status = request.form.get('status', default=NOTICE_STATUS["READ"], type=int)
@@ -437,9 +949,15 @@ class NoticeApi(LoginView):
 
     def delete(self, notice_id):
         """
-        删除
-        :param notice_id
-        :return: 
+        @apiVersion 1.0.0
+        @api {delete} /api/message/:notice_id 删除消息
+        @apiName NoticeApi_Delete
+        @apiGroup plaza  
+        
+        @apiParam notice_id 消息ID
+        
+        @apiUse NotificationError
+        @apiUse TokenRequired
         """
         parse_objectid(notice_id)
         ins = Notification.with_id(notice_id)
@@ -452,4 +970,14 @@ class NoticeApi(LoginView):
 class GitSpiderApi(ServiceView):
     @require_priv(2)
     def get(self, username):
+        """
+        @apiVersion 1.0.0
+        @api {get} /api/repos/:username 获取github此<username>的所有公开的repos
+        @apiName GitSpiderApi
+        @apiGroup GitSpider
+         
+        @apiParam {String} username github用户名字
+         
+          
+        """
         get_user_git.apply_async(args=[username])

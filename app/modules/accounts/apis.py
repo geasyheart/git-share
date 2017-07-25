@@ -19,8 +19,20 @@ from app.utils.token import Token
 class GeeTestRequest(ServiceView):
     def get(self):
         """
-
-        :return:
+        @apiVersion 1.0.0
+        @api {get} /api/geetest 获取geetest
+        @apiName Geetest
+        @apiGroup User
+        
+        @apiSuccess {String} challenge Challenge
+        @apiSuccess {Integer} code 返回码
+        @apiSuccess {String} gt GT
+        @apiSuccess {Boolean} new_captcha  New_captcha
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0
+        }
         """
         geetest_id = current_app.config['GEETEST_ID']
         geetest_key = current_app.config['GEETEST_KEY']
@@ -34,8 +46,20 @@ class GeeTestRequest(ServiceView):
 class NicknameApi(ServiceView):
     def get(self):
         """
-        查询此昵称是否已经使用
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/nickname 查询此昵称是否已经使用
+        @apiName 查询昵称
+        @apiGroup User
+        
+        @apiParam {string} nickname 昵称
+        
+        @apiSuccess {Integer} code 0: 表示没有使用
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0
+        }
+        @apiUse NickNameError 
+        
         """
         nickname = request.args.get('nickname')
         if nickname and verify_nickname(nickname):
@@ -47,11 +71,22 @@ class NicknameApi(ServiceView):
 class MailApi(ServiceView):
     def post(self):
         """
-        发送邮件
-
-        todo: 实际发送邮件也需要验证一下，但是目前pass，因为还要写前段样式
-        如果前端改了，只需要将ServiceView改成GeetestView即可。。
-        :return: 
+        @apiVersion 1.0.0
+        @api {post} /api/email 发送邮件
+        @apiName MailApi
+        @apiGroup User
+        
+        @apiParam {String} email 邮箱
+        @apiSuccess {Integer} code 0 开发模式会额外返回email_code
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0
+        }
+        @apiUse ArgsError
+        @apiUse FormatError
+        @apiUse EmailError
+        @apiUse LimitError
+        
         """
         email = request.form.get('email')
         if not email:
@@ -75,8 +110,36 @@ class MailApi(ServiceView):
 class SignUpApi(GeeTestView):
     def post(self):
         """
-        注册
-        :return: 
+        @apiVersion 1.0.0
+        @api {post} /api/signup 注册
+        @apiName SignupApi
+        @apiGroup User
+        
+        @apiParam {String} challenge Challenge
+        @apiParam {String} gt GT
+        @apiParam {Boolean} new_captcha  New_captcha
+        @apiParam {String} email 注册邮箱
+        @apiParam {String} pwd 注册密码
+        @apiParam {String} code 邮箱验证码
+        @apiParam {String} nickname 昵称
+        
+        @apiSuccess {Integer} 0 注册成功
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "uid": 123,
+            "nickname": "昵称",
+            "role": "role",
+            "gender": "gender",
+            "avatar": "avatar",
+            "github": "github",
+            "fp": "fp"
+        }
+        
+        @apiUse CodeError
+        @apiUse UniqueError
+        @apiUse ArgsError
+        
         """
         data = request.form
         email = data.get('email')
@@ -95,8 +158,30 @@ class SignUpApi(GeeTestView):
 class SigninApi(GeeTestView):
     def post(self):
         """
-        登录
-        :return: 
+        @apiVersion 1.0.0
+        @api {post} /api/signin 登录
+        @apiName SigninApi
+        @apiGroup User
+        
+        @apiParam {String} challenge Challenge
+        @apiParam {String} gt GT
+        @apiParam {Boolean} new_captcha  New_captcha
+        @apiParam {String} email 邮箱
+        @apiParam {String} pwd 密码
+        
+        @apiSuccess {Integer} 0 登录成功
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "uid": 123,
+            "nickname": "昵称",
+            "role": "role",
+            "gender": "gender",
+            "avatar": "avatar",
+            "github": "github",
+            "fp": "fp"
+        }
+        @apiUse SigninError
         """
         data = request.form
         email = data.get('email')
@@ -122,9 +207,25 @@ class ForgetPwdApi(GeeTestView):
 class UserInfoApi(ServiceView):
     def get(self, id):
         """
-        返回用户的信息以及其他信息
-        :param id: 用户ID
-        :return: 
+        @apiVersion 1.0.0
+        @api {get} /api/user/:id 返回用户的信息以及其他信息 
+        @apiName UserInfoApi
+        @apiGroup User
+        
+        @apiParam {Integer} id 用户ID
+        
+        @apiSuccess {Integer} code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "uid": 123,
+            "nickname": "昵称",
+            "role": "role",
+            "gender": "gender",
+            "avatar": "avatar",
+            "github": "github",
+            "fp": "fp"
+        }
         """
         user_info = User.with_id(id)
         if user_info:
@@ -134,8 +235,33 @@ class UserInfoApi(ServiceView):
 class UserSettings(LoginView):
     def post(self):
         """
-        修改个人信息
-        :return: 
+        @apiVersion 1.0.0
+        @api {post} /api/settings 修改个人信息 
+        @apiName UserSettings
+        @apiGroup User
+        
+        @apiParam {String} nickname 昵称
+        @apiParam {String} github Github
+        @apiParam {String} avatar 头像
+        @apiParam {Boolean} favorite_public 公开个人收藏
+        
+        @apiSuccess {Integer}  code 0
+        @apiSuccessExample {json} Success-Response:
+        {
+            "code": 0,
+            "uid": 123,
+            "nickname": "昵称",
+            "role": "role",
+            "gender": "gender",
+            "avatar": "avatar",
+            "github": "github",
+            "fp": "fp"
+        }
+        
+        
+        @apiUse ArgsError
+        @apiUse TokenRequired
+ 
         """
         data = request.form
         uid = g.uid
@@ -153,8 +279,16 @@ class UserSettings(LoginView):
 
     def put(self):
         """
-        修改个人密码
-        :return: 
+        @apiVersion 1.0.0
+        @api {put} /api/settings 修改个人密码 
+        @apiName UserSettings2
+        @apiGroup User
+        
+        @apiParam {String} cur_pwd 当前密码
+        @apiParam {String} pwd 新密码
+        
+        @apiSuccess {Integer} code 0
+        @apiUse PwdError
         """
         data = request.form
         uid = g.uid

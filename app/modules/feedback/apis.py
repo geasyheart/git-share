@@ -8,8 +8,15 @@ from app.models.feedback.model import Feedback, FeedbackLimit
 class FeedbackApi(LoginView):
     def post(self):
         """
-        提交反馈
-        :return: 
+        @apiVersion 1.0.0
+        @api {post} /api/feedback 反馈 
+        @apiName FeedbackApi
+        @apiGroup Feedback
+        
+        @apiParam {String} content 反馈内容
+        
+        @apiSuccess {Integer} code 0
+        @apiUse ArgsError
         """
         content = request.form.get('content')
         uid = g.uid

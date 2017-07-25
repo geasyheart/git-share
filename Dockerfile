@@ -22,3 +22,7 @@ EXPOSE 80
 ENTRYPOINT ["gunicorn","-c","gun_conf.py", "manager:app"]
 
 # docker run  -d -p 127.0.0.1:3000:80 --name git-share -v /var/logs/gunicorn/logs:/logs -v /srv/git-share/logs:/srv/git-share/logs -v /srv/git-share/settings.py:/tmp/git-share.py -e "GIT_SHARE_ENV=/tmp/git-share.py" zy/git-share:v1
+
+# if use newrelic
+# ENTRYPOINT ["NEW_RELIC_CONFIG_FILE=newrelic.ini","newrelic-admin","run-program","gunicorn","-c","gun_conf.py", "manager:app"]
+#docker run  -d -p 127.0.0.1:3000:80 --name git-share-v1 -v /var/logs/gunicorn/logs:/logs -v /srv/git-share/logs:/srv/git-share/logs -v /srv/git-share/settings.py:/tmp/git-share.py -e "GIT_SHARE_ENV=/tmp/git-share.py"  zy/git-share:v1
