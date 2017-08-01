@@ -7,6 +7,8 @@ from app.utils.token import Token
 def login_user(uid, payload):
     """
     登录用户
+
+    此处没有使用flask-login,使用jwt做用户身份验证...
     :type uid: int
     :type payload : dict
     :param uid
@@ -19,6 +21,7 @@ def login_user(uid, payload):
     cookie_max_age = current_app.config["COOKIE_MAX_AGE"]
     add_cookie(cookie_name, token.dumps(payload), cookie_max_age, httponly=True)
     add_cookie('uid', str(uid), cookie_max_age)
+
 
 def logout_user(uid):
     pass

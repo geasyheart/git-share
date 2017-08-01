@@ -1,7 +1,7 @@
 import random
 import string
 
-from mongoengine import Document, IntField, StringField, SequenceField, NotUniqueError, BooleanField, DictField
+from mongoengine import Document, IntField, StringField, SequenceField, NotUniqueError, BooleanField
 
 from app.core.exception import ArgsError
 from app.models.accounts.exceptions import UniqueError
@@ -11,8 +11,8 @@ from app.utils.rtype import verify_nickname, verify_password, verify_url
 
 
 class User(Document):
-    uid = SequenceField(primary_key=True, required=True)
-    _nickname = StringField(db_field="nickname", required=True, unique=True, max_length=15)
+    uid = SequenceField(primary_key=True, required=True)  # type:int
+    _nickname = StringField(db_field="nickname", required=True, unique=True)
     email = StringField(required=True, unique=True)
     _pwd = StringField(db_field="pwd", required=True)
     role = IntField(default=1)

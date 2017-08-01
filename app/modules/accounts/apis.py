@@ -1,11 +1,9 @@
-import json
-
 from flask import current_app, session, request, g
 from mongoengine import NotUniqueError
 
 from app.celery_tasks.tasks.email_sender import Email
 from app.core.exception import ArgsError
-from app.core.kit import ServiceView, GeeTestView, LoginView, add_cookie
+from app.core.kit import ServiceView, GeeTestView, LoginView
 from app.core.login import login_user
 from app.lib.geetest import GeetestLib
 from app.models.accounts.exceptions import FormatError, LimitError, CodeError, SigninError, EmailError, NikeNameError, \
@@ -13,7 +11,6 @@ from app.models.accounts.exceptions import FormatError, LimitError, CodeError, S
 from app.models.accounts.users import UserCode, CODE_PURPOSE, User
 from app.utils.passhash import PassHash
 from app.utils.rtype import verify_email, verify_nickname
-from app.utils.token import Token
 
 
 class GeeTestRequest(ServiceView):

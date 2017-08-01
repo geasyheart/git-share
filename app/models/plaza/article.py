@@ -181,14 +181,14 @@ class Favorite(Document):
     def create_favorite(cls, rid, node, title, uid):
         """
 
-            :type rid: objectid
-            :type node:objectid
-            :type uid: int
-            :param rid: 指向的文章ID
-            :param node:
-            :param title: 表示收藏的文章title,方便展示.
-            :param uid: uid
-            :return: 
+        :type rid: objectid
+        :type node:objectid
+        :type uid: int
+        :param rid: 指向的文章ID
+        :param node:
+        :param title: 表示收藏的文章title,方便展示.
+        :param uid: uid
+        :return:
         """
         try:
             cls(rid=rid, node=node, title=title, uid=uid).save()

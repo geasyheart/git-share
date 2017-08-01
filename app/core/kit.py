@@ -158,7 +158,7 @@ def require_priv(role):
                 return service_response(**TokenRequired().to_dict())
             g.uid = rs.get("uid")
             g.role = rs.get("role")
-            if g.role == 2:
+            if (g.role & role) == role:
                 return func(*args, **kwargs)
             else:
                 return service_response(**RoleRequired().to_dict())
